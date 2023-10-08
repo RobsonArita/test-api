@@ -1,6 +1,6 @@
 import http from 'http'
 
-export const initializeServer = (app: http.Server) => {
+export const initializeServer = (server: http.Server) => {
   try {
     const port = process.env.PORT
     const ip = process.env.IP
@@ -9,7 +9,7 @@ export const initializeServer = (app: http.Server) => {
     if (!ip) configurationExitResponse('ip')
 
     // @ts-ignore
-    app.listen(port, ip)
+    server.listen(port, ip)
     console.info('Server was successfully initialized!')
   } catch (err) {
     console.warn('Error at initializing server!', err)
