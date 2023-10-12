@@ -18,7 +18,7 @@ class SigninService {
     const allowedPassword = await bcrypt.compare(password, user.object.password)
     if (!allowedPassword) throw customResponse.send_unauthorized(authenticationFailedMessage)
 
-    const token = jwtFunction.generateToken({ ...user.object })
+    const token = jwtFunction.generateToken({ ...user.object, _id: user._id })
     return token
   }
 }

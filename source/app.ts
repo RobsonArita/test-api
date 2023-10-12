@@ -5,7 +5,6 @@ import { initializeDatabase } from './database'
 import { initializeServer } from './server'
 import { initializeRoutes } from './routes'
 
-
 dotenv.config()
 
 const app = express()

@@ -10,6 +10,7 @@ export const PropertyEvaluateSituationValues = Object.values(PropertyEvaluateSit
 
 export interface IProperty {
   _id?: Types.ObjectId
+  description?: string
   address?: string
   image?: string
   evaluateSituation?: PropertyEvaluateSituation
@@ -18,6 +19,7 @@ export interface IProperty {
 }
 
 export class PropertyModel extends MongoModel<IProperty> {
+  private readonly _description: IProperty['description']
   private readonly _address: IProperty['address']
   private readonly _image: IProperty['image']
   private readonly _evaluateSituation: IProperty['evaluateSituation']
@@ -27,6 +29,7 @@ export class PropertyModel extends MongoModel<IProperty> {
   constructor (property: IProperty) {
     super(property)
     
+    this._description = property.description
     this._address = property.address
     this._image = property.image
     this._evaluateSituation = property.evaluateSituation
@@ -36,6 +39,7 @@ export class PropertyModel extends MongoModel<IProperty> {
 
   get object (): Partial<IProperty> {
     return {
+      description: this._description,
       address: this._address,
       image: this._image,
       evaluateSituation: this._evaluateSituation,

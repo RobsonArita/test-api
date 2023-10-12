@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["express"],
     "target": "esnext",
     "module": "commonjs",
     "outDir": "./build",
@@ -14,8 +15,8 @@
     "strictPropertyInitialization": false,
     "typeRoots": [
       "types",
+      "./source/types",
       "./node_modules/@types",
-      "./source/types"
     ]
   },
   "exclude": [

@@ -8,6 +8,11 @@ export default class Validator {
   constructor () {
     this.validator = requestCheck()
     this.validator.requiredMessage = 'Campo obrigatório!'
+
+    this.validator.addRule('userId', {
+      validator: (value) => is.objectId(value),
+      message: 'Id de usuário inválido!'
+    })
   }
 
   public validate (...args: Array<{ [key: string]: any } | undefined>) {

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { customResponse } from '../middleware'
 
 
 const generateToken = (data: any): string => {

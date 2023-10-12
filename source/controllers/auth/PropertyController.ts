@@ -8,7 +8,10 @@ const validator = new PropertyValidator()
 PropertyController.post('/', async (request: Request, response: Response, next: NextFunction) => {
   try {
     const { address } = request.body
+    const { userId } = request
+
     validator.validate(
+      { userId },
       { address }
     )
   } catch (err) {

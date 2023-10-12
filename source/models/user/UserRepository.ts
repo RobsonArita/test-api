@@ -9,6 +9,13 @@ export class UserRepository {
     this.mongoDB = mongoDB
   }
 
+  async findById (id: Types.ObjectId): Promise<UserModel | null> {
+    const user = await this.mongoDB.findById(id)
+    if (!user) return null
+
+    return new UserModel(user)
+  }
+
   async create (user: UserModel): Promise<UserModel> {
     const createdUser = await this.mongoDB.create(user.saveDB)
     return new UserModel(createdUser)

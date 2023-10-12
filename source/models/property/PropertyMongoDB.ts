@@ -7,6 +7,7 @@ export interface IPropertyDocument extends Document, Omit<IProperty, '_id'> {}
 export interface IPropertyModel extends Model<IPropertyDocument> {}
 
 const PropertySchema: SchemaDefinition = {
+  description: String,
   address: String,
   image: String,
   evaluateSituation: {
