@@ -1,7 +1,7 @@
 import express from 'express'
 import testRouter from './routes/testRoutes'
 import { initializeMiddlewares } from './middleware'
-import UnauthRouter from './routes/Unauth/UnauthRoutes'
+import UnauthRouter from './routes/UnauthRoutes'
 
 export const initializeRoutes = (app: express.Express) => {
   initializeMiddlewares(app)

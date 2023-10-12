@@ -1,13 +1,14 @@
 import jwt from 'jsonwebtoken'
 
-const secretKey = process.env.JWT_SECRET
 
-export const generateToken = (data: any): string => {
+const generateToken = (data: any): string => {
+  const secretKey = process.env.JWT_SECRET
   if (!secretKey) return 'Could not found secret key'
   return jwt.sign(data, secretKey, { expiresIn: '1h' })
 }
 
-export const verifyToken = (token: string) => {
+const verifyToken = (token: string) => {
+  const secretKey = process.env.JWT_SECRET
   if (!secretKey) return null
   try {
     return jwt.verify(token, secretKey)
@@ -15,4 +16,9 @@ export const verifyToken = (token: string) => {
     console.warn(err)
     return null
   }
+}
+
+export const jwtFunction = {
+  generateToken,
+  verifyToken
 }
