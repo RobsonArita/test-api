@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import UserController from '../user/UserController'
+import UserController from '../models/user/UserController'
 import ErrorHandler from '../middlewares/ErrorHandler'
 
 const testRouter = Router()

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import User from './UserMongoDB'
-import { customResponse } from '../middleware'
+import { customResponse } from '../../middleware'
 const UserController = Router()
 
 UserController.post('/', async (request: Request, response: Response, next: NextFunction) => {

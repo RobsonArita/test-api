@@ -17,6 +17,7 @@ export interface IUser {
 }
 
 export class UserModel {
+  private readonly _id: IUser['_id']
   private readonly _name: IUser['name']
   private readonly _email: IUser['email']
   private readonly _level: IUser['level']
@@ -24,6 +25,7 @@ export class UserModel {
   private readonly _password: IUser['password']
 
   constructor (user: Partial<IUser>) {
+    this._id = user._id
     this._name = user.name
     this._email = user.email
     this._level = user.level
@@ -33,6 +35,7 @@ export class UserModel {
 
   get object (): Partial<IUser> {
     return {
+      _id: this._id,
       name: this._name,
       email: this._email,
       level: this._level,

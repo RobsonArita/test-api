@@ -9,7 +9,10 @@ export interface IUserModel extends Model<IUserDocument> {}
 const User = new Schema({
   name: String,
   email: String,
-  level: UserLevelValues,
+  level: {
+    type: String,
+    enum: UserLevelValues
+  },
   cellphone: String,
   password: String
 })
