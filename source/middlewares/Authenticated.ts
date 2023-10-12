@@ -23,7 +23,7 @@ const Authenticated = async (request: Request, _: Response, next: NextFunction) 
 
   return next()
   } catch (err) {
-    return customResponse.send_badRequest('Token inválida!')
+    return customResponse.send_forbidden('Token inválida!')
   }
 }
 
