@@ -1,4 +1,5 @@
 import http from 'http'
+import colors from 'colors'
 
 export const initializeServer = (server: http.Server) => {
   try {
@@ -10,9 +11,11 @@ export const initializeServer = (server: http.Server) => {
 
     // @ts-ignore
     server.listen(port, ip)
-    console.info('Server was successfully initialized!')
+    const consoleMessage = colors.cyan('Server was successfully initialized!')
+    console.info(consoleMessage)
   } catch (err) {
-    console.warn('Error at initializing server!', err)
+    const consoleMessage = colors.red('Error at initializing server!')
+    console.warn(consoleMessage, err)
   }
 }
 
