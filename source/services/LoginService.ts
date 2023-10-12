@@ -33,11 +33,11 @@ class LoginService {
 
     const existsUser = await this.userRepository.findOne({ email })
     console.log({ existsUser: existsUser?.object })
-    if (!existsUser?.object?._id) throw customResponse.send_notFound('Usuário com este email não encontrado!', { email })
+    if (!existsUser?._id) throw customResponse.send_notFound('Usuário com este email não encontrado!', { email })
     if (existsUser.object?.password) throw customResponse.send_forbidden('Usuário já registrado com esse email!', { email })
 
     const criptedPassword = await bcrypt.hash(password, 14)
-    await this.userRepository.setPassword(existsUser.object._id, criptedPassword)
+    await this.userRepository.setPassword(existsUser._id, criptedPassword)
   }
 }
 

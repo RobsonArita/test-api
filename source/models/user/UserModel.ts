@@ -1,4 +1,5 @@
 import { Types } from 'mongoose'
+import MongoModel from '../MongoModel'
 
 export enum UserLevel {
   proprietario = 'proprietario',
@@ -16,8 +17,7 @@ export interface IUser {
   password?: string
 }
 
-export class UserModel {
-  private readonly _id: IUser['_id']
+export class UserModel extends MongoModel<IUser> {
   private readonly _name: IUser['name']
   private readonly _email: IUser['email']
   private readonly _level: IUser['level']
@@ -25,6 +25,8 @@ export class UserModel {
   private readonly _password: IUser['password']
 
   constructor (user: Partial<IUser>) {
+    super(user)
+
     this._id = user._id
     this._name = user.name
     this._email = user.email
@@ -35,7 +37,6 @@ export class UserModel {
 
   get object (): Partial<IUser> {
     return {
-      _id: this._id,
       name: this._name,
       email: this._email,
       level: this._level,
