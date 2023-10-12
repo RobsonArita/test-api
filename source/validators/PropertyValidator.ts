@@ -10,5 +10,10 @@ export default class PropertyValidator extends Validator {
       message: 'Endereço inválido!'
     })
 
+    this.validator.addRule('description', {
+      validator: (value) => is.string(value),
+      message: 'Descrição inválida!'
+    })
+
   }
 }
