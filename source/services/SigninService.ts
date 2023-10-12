@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
 import { customResponse } from '../middleware'
 import { UserRepositoryImp } from '../models/user/UserMongoDB'
-import { UserLevel, UserModel } from '../models/user/UserModel'
 import { jwtFunction } from '../jwt/setupJWT'
 
 class SigninService {
@@ -10,10 +9,7 @@ class SigninService {
     this.userRepository = userRepository
   }
 
-  async signin (email?: string, password?: string): Promise<string> {
-    if (!email) throw customResponse.send_preconditionRequired('Email não inserido!')
-    if (!password) throw customResponse.send_preconditionRequired('Senha não inserida!')
-
+  async signin (email: string, password: string): Promise<string> {
     const authenticationFailedMessage = 'Autenticação inválida!'
     const user = await this.userRepository.findOne({ email })
     if (!user) throw customResponse.send_unauthorized(authenticationFailedMessage)
