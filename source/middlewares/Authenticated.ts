@@ -4,12 +4,12 @@ import { jwtFunction } from '../jwt/setupJWT'
 
 const Authenticated = async (request: Request, _: Response, next: NextFunction) => {
   const token = request.header('Authorization')
-  if (!token) throw customResponse.send_badRequest('Sem permissão!')
+  if (!token) return customResponse.send_unauthorized('Sem permissão!')
 
   try {
     jwtFunction.verifyToken(token)
   } catch (err) {
-    throw customResponse.send_badRequest('Sem permissão')
+    return customResponse.send_unauthorized('Sem permissão')
   }
 
   return next()

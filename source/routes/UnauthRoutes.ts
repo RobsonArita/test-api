@@ -5,13 +5,11 @@ import SigninController from '../controllers/unauth/SigninController'
 
 const UnauthRouter = Router()
 
-const LoginRouter = Router()
-LoginRouter.use('/login', LoginController)
 
-const SigninRouter = Router()
-SigninRouter.use('/signin', SigninController)
+const Routes = Router()
+Routes.use('/signin', SigninController)
+Routes.use('/login', LoginController)
 
-UnauthRouter.use('/unauth', LoginRouter, ErrorHandler)
-UnauthRouter.use('/unauth', SigninRouter, ErrorHandler)
+UnauthRouter.use('/unauth', Routes, ErrorHandler)
 
 export default UnauthRouter

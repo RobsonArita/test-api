@@ -32,7 +32,7 @@ class LoginService {
     if (!password) throw customResponse.send_preconditionRequired('Senha não inserida!')
 
     const existsUser = await this.userRepository.findOne({ email })
-    console.log({ existsUser: existsUser?.object })
+
     if (!existsUser?._id) throw customResponse.send_notFound('Usuário com este email não encontrado!', { email })
     if (existsUser.object?.password) throw customResponse.send_forbidden('Usuário já registrado com esse email!', { email })
 
