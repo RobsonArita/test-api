@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import User from './UserMongoDB'
-import CustomResponse from '../customResponse/CustomResponse'
 import { customResponse } from '../middleware'
 const UserController = Router()
 
