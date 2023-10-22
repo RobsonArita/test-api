@@ -9,7 +9,7 @@ class LoginService {
     this.userRepository = userRepository
   }
 
-  async register (name: string, email: string, cellphone: string, level: string): Promise<void> {
+  async register (name: string, email: string, cellphone: string, level: string, password: string): Promise<void> {
     const existsUser = await this.userRepository.exists({ email })
     if (existsUser) throw customResponse.send_forbidden('Usuário com este email já existe!', { email })
 
@@ -21,6 +21,8 @@ class LoginService {
       level: registeredLevel,
       name
     }))
+
+    await this.signup(email, password)
   }
 
   async signup (email: string, password: string): Promise<void> {

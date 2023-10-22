@@ -11,15 +11,17 @@ export const LoginServiceImp = new LoginService(UserRepositoryImp)
 
 LoginController.post('/register', async (request: Request, _: Response, next: NextFunction) => {
   try {
-    const { name, email, cellphone, level } = request.body
+    const { name, email, cellphone, level, password } = request.body
 
     validator.validate(
       { name },
       { email },
       { cellphone },
-      { level }
+      { level },
+      { password }
+
     )
-    await LoginServiceImp.register(name, email, cellphone, level)
+    await LoginServiceImp.register(name, email, cellphone, level, password)
     return customResponse.send_ok('Usuário criado com sucesso!')
   } catch (err) {
     return next(err)
