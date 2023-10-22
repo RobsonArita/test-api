@@ -18,8 +18,8 @@ SigninController.post('/', async (request: Request, _: Response, next: NextFunct
       { password }
     )
 
-    const token = await SigninServiceImp.signin(email, password)
-    return customResponse.send_ok('Signin efetuado com sucesso!', { token })
+    const signinResponse = await SigninServiceImp.signin(email, password)
+    return customResponse.send_ok('Signin efetuado com sucesso!', { signinResponse })
   } catch (err) {
     return next(err)
   }
