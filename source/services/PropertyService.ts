@@ -1,6 +1,8 @@
 import { customResponse } from '../middleware'
-import { PropertyEvaluateSituation, PropertyModel } from '../models/property/PropertyModel'
+import { IPaginateResult } from '../models/MongoPaginate'
+import { IProperty, PropertyEvaluateSituation, PropertyModel } from '../models/property/PropertyModel'
 import { PropertyRepositoryImp } from '../models/property/PropertyMongoDB'
+import { IListPropertyParams } from '../models/property/PropertyRepository'
 import { UserRepositoryImp } from '../models/user/UserMongoDB'
 import { Types } from 'mongoose'
 
@@ -14,6 +16,10 @@ export class PropertyService {
   ) {
     this.userRepository = userRepository
     this.propertyRepository = propertyRepository
+  }
+
+  async list (userId: string, filters: IListPropertyParams): Promise<IPaginateResult<IProperty>> {
+    return await this.propertyRepository.list(filters)
   }
 
   async create (userId: string, property: ICreateProperty): Promise<void> {
