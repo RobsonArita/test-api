@@ -2,9 +2,12 @@ import mongoose, { Schema, type Document, type Model, SchemaDefinition, Types } 
 import { IProperty, PropertyEvaluateSituationValues } from './PropertyModel'
 import aggregatePaginate from 'mongoose-aggregate-paginate-v2'
 import { PropertyRepository } from './PropertyRepository'
+import { IAggregatePaginate } from '../MongoPaginate'
 
 export interface IPropertyDocument extends Document, Omit<IProperty, '_id'> {}
-export interface IPropertyModel extends Model<IPropertyDocument> {}
+export interface IPropertyModel extends Model<IPropertyDocument> {
+  aggregatePaginate: IAggregatePaginate<IProperty>
+}
 
 const PropertySchema: SchemaDefinition = {
   creatorId: Types.ObjectId,
