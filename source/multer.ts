@@ -4,8 +4,8 @@ import aws from 'aws-sdk'
 
 const s3 = new aws.S3()
 aws.config.update({
-  accessKeyId: 'AKIA2UC3FPND7SWD7FUN',
-  secretAccessKey: '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',
+  accessKeyId: process.env.AWS_KEY,
+  secretAccessKey: process.env.AWS_SECRET,
   region: 'sa-east-1',
 })
 
