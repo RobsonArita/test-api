@@ -11,7 +11,7 @@ export class FileRepository {
 
   async create (file: FileModel): Promise<FileModel> {
     file._id = new Types.ObjectId
-    const createdFile = await this.mongoDB.create(file.saveDB)
+    const createdFile = await this.mongoDB.create({ ...file.saveDB, _id: file._id })
     createdFile._id = file._id
     return new FileModel(createdFile)
   }
