@@ -13,7 +13,8 @@ export interface IProperty {
   creatorId?: Types.ObjectId
   description?: string
   address?: string
-  image?: string
+  image?: Array<Types.ObjectId>
+  title?: string
   evaluateSituation?: PropertyEvaluateSituation
   visible?: boolean
   isAlocated?: boolean
@@ -26,6 +27,7 @@ export class PropertyModel extends MongoModel<IProperty> {
   private readonly _image: IProperty['image']
   private readonly _evaluateSituation: IProperty['evaluateSituation']
   private readonly _visible: IProperty['visible']
+  private readonly _title: IProperty['title']
   private readonly _isAlocated: IProperty['isAlocated']
 
   constructor (property: IProperty) {
@@ -37,6 +39,7 @@ export class PropertyModel extends MongoModel<IProperty> {
     this._image = property.image
     this._evaluateSituation = property.evaluateSituation
     this._visible = property.visible
+    this._title = property.title
     this._isAlocated = property.isAlocated
   }
 
@@ -48,7 +51,8 @@ export class PropertyModel extends MongoModel<IProperty> {
       image: this._image,
       evaluateSituation: this._evaluateSituation,
       isAlocated: this._isAlocated,
-      visible: this._visible
+      visible: this._visible,
+      title: this._title
     }
   }
 

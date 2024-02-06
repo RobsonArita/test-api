@@ -26,11 +26,14 @@ export class PropertyService {
     const creator = await this.userRepository.findById(new Types.ObjectId(userId))
     if (!creator) throw customResponse.send_notFound('Usuário não encontrado!', { userId })
 
+    const toObjectIdImage = property.image?.map(im => new Types.ObjectId(im))
     await this.propertyRepository.create(new PropertyModel({
       address: property.address,
       creatorId: creator._id,
       description: property.description,
       evaluateSituation: PropertyEvaluateSituation.analisys,
+      image: toObjectIdImage,
+      title: property.title,
       isAlocated: false,
       visible: false
     }))
@@ -40,4 +43,6 @@ export class PropertyService {
 export interface ICreateProperty {
   address: string
   description: string
+  title: string
+  image: Array<Types.ObjectId>
 }

@@ -13,7 +13,7 @@ const PropertySchema: SchemaDefinition = {
   creatorId: Types.ObjectId,
   description: String,
   address: String,
-  image: String,
+  image: [Types.ObjectId],
   evaluateSituation: {
     type: String,
     enum: PropertyEvaluateSituationValues
@@ -21,7 +21,7 @@ const PropertySchema: SchemaDefinition = {
   visible: Boolean,
   isAlocated: Boolean
 }
-const Property = new Schema(PropertySchema)
+const Property = new Schema(PropertySchema, { timestamps: true })
 Property.plugin(aggregatePaginate)
 
 const PropertyMongoDB = mongoose.model<IPropertyDocument, IPropertyModel>('Property', Property)

@@ -17,18 +17,20 @@ export const PropertyServiceImp = new PropertyService(
 
 PropertyController.post('/solicitate', CreateProperty, async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const { address, description } = request.body
+    const { address, description, title, image } = request.body
     const { userId } = request
 
     validator.validate(
       { userId },
       { address },
-      { description }
+      { description },
+      { title },
+      { image }
     )
-
-    await PropertyServiceImp.create(userId, { address, description })
+    await PropertyServiceImp.create(userId, { address, description, title, image: image.split(',') })
     return customResponse.send_ok('Solicitação de imóvel criada com sucesso!')
   } catch (err) {
+    console.log({ err })
     return next(err)
   }
 })
