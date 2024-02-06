@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 const Authenticated = async (request: Request, _: Response, next: NextFunction) => {
   try {
   const token = request.header('Authorization')
+  console.log({ token })
   if (!token) throw ''
 
   const secretKey = process.env.JWT_SECRET

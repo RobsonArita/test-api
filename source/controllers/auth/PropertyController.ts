@@ -6,14 +6,28 @@ import { UserRepositoryImp } from '../../models/user/UserMongoDB'
 import { PropertyRepositoryImp } from '../../models/property/PropertyMongoDB'
 import { customResponse } from '../../middleware'
 import CreateProperty from '../../middlewares/CreateProperty'
+import { FileRepositoryImp } from '../../models/file/FileMongoDB'
 
 const PropertyController = Router()
 const validator = new PropertyValidator()
 
 export const PropertyServiceImp = new PropertyService(
   UserRepositoryImp,
-  PropertyRepositoryImp
+  PropertyRepositoryImp,
+  FileRepositoryImp
 )
+
+PropertyController.get('/', async (request: Request, response: Response, next: NextFunction) => {
+  try {
+    const { userId } = request
+    const { page } = request.query
+
+    const paginate = await PropertyServiceImp.list({ page: page ? Number(page) : 1 }, userId?.toString())
+    return customResponse.send_ok('Imóveis encontrados com sucesso!', { paginate })
+  } catch (err) {
+    return next(err)
+  }
+})
 
 PropertyController.post('/solicitate', CreateProperty, async (request: Request, response: Response, next: NextFunction) => {
   try {

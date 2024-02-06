@@ -12,6 +12,7 @@ export interface IPropertyModel extends Model<IPropertyDocument> {
 const PropertySchema: SchemaDefinition = {
   creatorId: Types.ObjectId,
   description: String,
+  title: String,
   address: String,
   image: [Types.ObjectId],
   evaluateSituation: {

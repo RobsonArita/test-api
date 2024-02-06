@@ -1,7 +1,7 @@
 import { IPaginateResult } from '../MongoPaginate'
 import { IProperty, PropertyModel } from './PropertyModel'
 import { IPropertyModel } from './PropertyMongoDB'
-
+import { Types } from 'mongoose'
 export class PropertyRepository {
   private readonly mongoDB: IPropertyModel
   constructor (mongoDB: IPropertyModel) {
@@ -13,9 +13,12 @@ export class PropertyRepository {
     return new PropertyModel(createdProperty)
   }
 
-  async list (filters?: IListPropertyParams): Promise<IPaginateResult<IProperty>> {
+  async list (filters?: IListPropertyParams, userId?: string): Promise<IPaginateResult<IProperty>> {
+    const pipeline: Array<any> = [{ $match: {} }]
+    if (userId) pipeline.push({ $match: { creatorId: new Types.ObjectId(userId) } })
+    console.log({ pipeline })
     return await this.mongoDB.aggregatePaginate(
-      this.mongoDB.aggregate([{ $match: {} }]),
+      this.mongoDB.aggregate(pipeline),
       {
         page: Number(filters?.page) ?? 1,
         limit: Number(filters?.limit) ?? 10,

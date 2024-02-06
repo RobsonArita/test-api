@@ -16,6 +16,12 @@ export class FileRepository {
     return new FileModel(createdFile)
   }
 
+  async fetchUrlById (id: Types.ObjectId) {
+    const file = await this.mongoDB.findById(id)
+    if (!file?.url) return null
+    return file.url
+  }
+
   async list (filters?: IDefaultListParams): Promise<IPaginateResult<IFile>> {
     return await this.mongoDB.aggregatePaginate(
       this.mongoDB.aggregate([{ $match: {} }]),
