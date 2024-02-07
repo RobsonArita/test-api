@@ -31,7 +31,7 @@ PropertyController.get('/', async (request: Request, response: Response, next: N
 
 PropertyController.post('/solicitate', CreateProperty, async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const { address, description, title, image } = request.body
+    const { address, description, title, image, value } = request.body
     const { userId } = request
 
     validator.validate(
@@ -39,10 +39,23 @@ PropertyController.post('/solicitate', CreateProperty, async (request: Request, 
       { address },
       { description },
       { title },
-      { image }
+      { image },
+      { value }
     )
-    await PropertyServiceImp.create(userId, { address, description, title, image: image.split(',') })
+    await PropertyServiceImp.create(userId, { address, description, title, image: image.split(','), value })
     return customResponse.send_ok('Solicitação de imóvel criada com sucesso!')
+  } catch (err) {
+    console.log({ err })
+    return next(err)
+  }
+})
+
+PropertyController.get('/:id', async (request: Request, response: Response, next: NextFunction) => {
+  try {
+    const { id } = request.params
+
+    const property = await PropertyServiceImp.detail(id)
+    return customResponse.send_ok('Propriedade encontrada!', { property })
   } catch (err) {
     console.log({ err })
     return next(err)

@@ -18,6 +18,7 @@ export interface IProperty {
   evaluateSituation?: PropertyEvaluateSituation
   visible?: boolean
   isAlocated?: boolean
+  value?: number
 }
 
 export class PropertyModel extends MongoModel<IProperty> {
@@ -29,6 +30,7 @@ export class PropertyModel extends MongoModel<IProperty> {
   private readonly _visible: IProperty['visible']
   private readonly _title: IProperty['title']
   private readonly _isAlocated: IProperty['isAlocated']
+  private readonly _value: IProperty['value']
 
   constructor (property: IProperty) {
     super(property)
@@ -41,6 +43,7 @@ export class PropertyModel extends MongoModel<IProperty> {
     this._visible = property.visible
     this._title = property.title
     this._isAlocated = property.isAlocated
+    this._value = property.value
   }
 
   get object (): Partial<IProperty> {
@@ -52,7 +55,8 @@ export class PropertyModel extends MongoModel<IProperty> {
       evaluateSituation: this._evaluateSituation,
       isAlocated: this._isAlocated,
       visible: this._visible,
-      title: this._title
+      title: this._title,
+      value: this._value
     }
   }
 

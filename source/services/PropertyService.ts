@@ -55,8 +55,19 @@ export class PropertyService {
       image: toObjectIdImage,
       title: property.title,
       isAlocated: false,
-      visible: false
+      visible: false,
+      value: property.value
     }))
+  }
+
+  async detail (propertyId: string) {
+    const property = (await this.propertyRepository.findById(propertyId))?.object
+    if (property?.image) {
+      const urls = await this.fetchFilesUrls(property.image)
+      //@ts-ignore
+      property.image = urls
+    }
+    return property
   }
 }
 
@@ -65,4 +76,5 @@ export interface ICreateProperty {
   description: string
   title: string
   image: Array<Types.ObjectId>
+  value: number
 }

@@ -13,6 +13,13 @@ export class PropertyRepository {
     return new PropertyModel(createdProperty)
   }
 
+  async findById (id: string): Promise<PropertyModel | null> {
+    const property = await this.mongoDB.findById(id)
+    if (!property) return null
+    
+    return new PropertyModel(property)
+  }
+
   async list (filters?: IListPropertyParams, userId?: string): Promise<IPaginateResult<IProperty>> {
     const pipeline: Array<any> = [{ $match: {} }]
     if (userId) pipeline.push({ $match: { creatorId: new Types.ObjectId(userId) } })

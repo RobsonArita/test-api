@@ -16,4 +16,16 @@ UnauthPropertyController.get('/', async (request: Request, response: Response, n
   }
 })
 
+UnauthPropertyController.get('/:id', async (request: Request, response: Response, next: NextFunction) => {
+  try {
+    const { id } = request.params
+
+    const property = await PropertyServiceImp.detail(id)
+    return customResponse.send_ok('Propriedade encontrada!', { property })
+  } catch (err) {
+    console.log({ err })
+    return next(err)
+  }
+})
+
 export default UnauthPropertyController

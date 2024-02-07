@@ -20,7 +20,8 @@ const PropertySchema: SchemaDefinition = {
     enum: PropertyEvaluateSituationValues
   },
   visible: Boolean,
-  isAlocated: Boolean
+  isAlocated: Boolean,
+  value: Number
 }
 const Property = new Schema(PropertySchema, { timestamps: true })
 Property.plugin(aggregatePaginate)
